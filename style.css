@@ -12,3 +12,7 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+div.definition, div.theorem {
+  margin-top: 10px;
+}
