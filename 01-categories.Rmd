@@ -1,0 +1,97 @@
+# Categories and Functors
+
+```{definition, name="Metagraph"}
+A metagraph consists of *objects* and *arrows* and two operations: domain and codomain of an arrow.
+```
+
+```{definition, metacategory, name="MetaCategory"}
+A metacategory is a metagraph of two operations:
+
+- *identity*: assigns to each object $a$ an arrow $1_a: a \to a$
+- *composition*: assigns to each pair of arrows $\langle g, f\rangle$ with $\op{dom} g = \op{cod} f$ an arrow $g \circ f$ with
+  $$g \circ f: \op{dom} f \to \op{cod} g$$
+
+and the two axioms:
+
+- *associativity*
+- *Unit law*: for all $f: a \to b$ and $g: b \to c$
+  $$1_b \circ f = f \quad g \circ 1_b = g$$
+```
+
+```{remark}
+Since every object is assigned a unique (by unit law) identity, a metacategory can be viewed as composed of entirely arrows by identifying each object with its identity.
+```
+
+```{definition, name="Morphism"}
+The arrows of any metacategory is called its morphisms.
+```
+
+```{definition, name="Directed Graph"}
+A directed graph is a set $O$ of objects and a set $A$ of arrows, and two functions
+$$
+\op{dom}: A \to O, \quad \op{cod}: A \to O
+$$
+
+The set of all *composable paris* of arrows in this graph is the set
+$$
+A \times_O A := \{\angle{g, f} : g, f \in A, \dom g = \op{cod} f\}
+$$
+
+called the **product** over $O$.
+```
+
+```{definition, name="Category"}
+A category is a graph with two additional functions
+$$
+\begin{align*}
+\mathrm{id}&: O \to A, && \circ: A \times_O A \to A \\
+\mathrm{id}&: c \mapsto \mathrm{id}_c, && \circ: \angle{g, f} \mapsto g \circ f
+\end{align*}
+$$
+called the *identity* and the *composition*, also written as $g f$ such that
+
+1. $\dom (\id a) = \cod(\id a) = a$
+2. $\dom (g \circ f) = \dom f$
+3. $\cod (g \circ f) = \cod g$
+
+and that for all objects and all composable pairs of arrows, the unit and associativity axioms (def \@ref(def:metacategory)) hold.
+
+As a convention, we write, for a category $C$, that
+
+1. $c \in C$ as equivalent to $c$ is an object of $C$
+2. $f$ in $C$ as $f$ is an arrow of $C$
+
+The set of all arrows from object $b$ to $c$ is denoted by
+$$
+\op{hom}(b, c) = \{ f: f \bin{in} C, \dom f = b, \cod f = c \}
+$$
+```
+
+```{definition, name="Monoids"}
+A monoid is a category with one object.
+
+Therefore, it can be described as a set $M$ (the arrows) with a binary operation $M \times M \to M$ that is associative and has an identity, i.e., $M$ is a semi-group with identity.
+```
+
+```{proposition}
+For any category $C$, the set $\op{hom}(a, a)$ is a monoid for any $c \in C$.
+```
+
+```{definition, name="Functor"}
+A functor is a morphism of categories. In detail, for categories $C, B$, a functor $T: C \to B$ with *domain* $C$ and *codomain* $B$ consists of two functions: 
+
+1. the *object function*: $c \mapsto Tc$, 
+2. the *arrow function*: $f \mapsto Tf$
+
+such that 
+
+1. if $f: c \to c'$ then $Tf: Tc \to Tc'$
+2. $T(1_c) = 1_{Tc}$ and $T(g \circ f) = Tg \circ Tf$
+```
+
+A functor can also be described when the categories are defined by arrows only: 
+```{definition, name="Functor"}
+A functor is a function $T: C \to B$ between categories $C, B$ (consisting of only arrows), that 
+1. carries each identity to an identity
+2. for each composable pair $\angle{g, f}$, $\angle{Tg, Tf}$ is also composble with $Tg \circ Tf = T (g \circ f)$
+```
