@@ -1,0 +1,186 @@
+# Categories and Functors (from Kawashira)
+
+```{definition, name="Category, Morphisms"}
+A category $C$ consists of:
+
+1. a set $\op{Ob}(\mcal C)$,
+2. for all $X, Y \in \op{Ob}(\mcal C)$, a set $\hom_{\mcal C}(X, Y)$ (whose elements called the **morphisms**)
+3. for any $X, Y, Z \in \op{Ob}(C)$, a map
+    $$
+    \begin{align*}
+    \hom_{\mcal C}(X, Y) \times \hom_{\mcal C} (Y, Z) &\to \hom_{\mcal C} (X, Z) \\
+    (f, g) &\mapsto g \circ f
+    \end{align*}
+$$
+    called the composition
+
+satisfying
+
+1. the associative law
+2. the unit law
+```
+
+```{example}
+\
+
+1. $\mathbf{pSet}$ is the category of pointed $\mcal U$ -sets,
+    - i.e., pairs $(X, x)$ with $X \in \mcal U$ and $x \in X$.
+    - a morphism $f: (X, x) \to (Y, y)$ is a map $f: X \to Y$ with $f(x) = y$.
+
+2. $\bf Rel$ is the category of all $\mcal U$-sets with morphisms their all possible binary relations
+
+2. $\bf Arr$ denotes the category $a \to b$
+
+3. $\bf Pr$ denotes the category of one object and one morphism $p: c \to c$ other than identity, satisfyinng $p^2 = p$
+
+4. $\op{Mor}(\mcal C)$ denotes the category whose objects are the morphisms of $\mcal C$, and whose morphisms are defined as
+    $$\hom_{\op{Mor}(\mcal C)}(f, g) = \{ u: X \to X', v: Y \to Y' | g \circ u = v \circ f \}$$
+    for any $f: X \to Y, g: X' \to Y'$.
+
+5. The equivalence classes in a category induced by
+$$
+X \sim Y \iff \hom (X, Y) \ne \emptyset
+$$
+can be viewed as a discrete category $\pi_0(\mcal C)$ such that there is a natrual functor $F: \mcal C \to \pi_0(\mcal C)$
+```
+
+```{definition, name="Category Classification"}
+A category $\mcal C$ is called a
+
+1. $\mcal U$ -category if $\hom(X, Y)$ is $\mcal U$ -small for any $X, Y \in \op{Ob}(\mcal C)$.
+2. $\mcal U$ -small if $\mcal C$ is $\op{Ob} (\mcal C)$ is $\mcal U$ -small.
+1. *discrete* if all the morphisms are identity
+2. *non empty* if its objects are non empty
+3. *groupoid* if all morphisms are isomorphisms
+4. *finite* if the set of all morphisms (hence also the set of objects) is finite
+5. *monoid* if it only has one object
+6. *connected* if for any objects $X, Y$ there is a sequence
+    $$X = X_0 , \dots, X_n = Y$$
+    such that one of $\hom (X_j, X_{j+1})$ or $\hom (X_{j+1}, X_j)$ is not empty for any $0 \le j \le n-1$
+```
+
+```{definition, name="Object Classification"}
+An object $O$ is
+
+1. *Initial* if there is exactly one morphism $O \to X$ for any object $X$
+2. *Terminal* if there is exactly one morphism $X \to O$ for any object $X$
+3. *a zero* if it is both initial and terminal.
+    - zero objects are denoted by $0$
+    - the morphism composed by $X \to 0 \to Y$ is denoted as $0: X \to Y$ for any objects $X, Y$
+
+The above objects are unique up to isomorphisms.
+```
+
+```{definition, name="Morphism Classification"}
+A morphism $f: X \to Y$ is a
+
+1. *isomorphism* if there is another morphism (the *inverse*) $g: Y \to X$ such that
+    $$f \circ g = 1_Y, g \circ f = 1_X$$
+2. *endomorphism* if $X = Y$
+3. *automorphism* if $f$ is isomorphism plus endomorphism
+4. *parallel* with another morphism if they have the same source and target
+5. *monomorphism* if for any pair of parallel morphisms $g_1, g_2: Z \rightrightarrows X$,
+    $$f \circ g_1 = f \circ g_2 \iff g_1 = g_2$$
+    i.e., the map $f \circ: \hom(Z, X) \to \hom(Z, Y)$ is injective for any $Z$.
+6. *epimorphism* if for any pair of parallel morphisms $g_1, g_2: Y \rightrightarrows Z$,
+    $$g_1 \circ f = g_2 \circ f \iff g_1 = g_2$$
+    i.e., the map $\circ f: \hom(Y, Z) \to \hom(X, Z)$ is injective for any $Z$.
+```
+
+```{definition, name="section"}
+If $f \circ g = 1_Y$ for $f \in \hom(X, Y), g \in \hom(Y, X)$, then
+
+1. $f$ is a left inverse and a cosection of $g$
+2. $g$ is a right inverse and a section of $f$
+```
+
+```{proposition}
+$f \in \hom(X, Y)$ is a
+
+1. *monomorphism* if it has a left inverse
+2. *epimorphism* if it has a right inverse
+```
+
+```{definition, name="Saturation"}
+A subcategory $\mcal C'$ of $\mcal C$ is
+
+1. *full* if $\hom_{\mcal C'} (X, Y) = \hom_{\mcal C} (X, Y)$ for all $X, Y \in \mcal C'$
+2. *saturated* if, in addition, $X \in \mcal C$ belong to $\mcal C'$ whenever $X$ is isomorphic to an object of $\mcal C'$
+```
+
+```{definition, name="Functors"}
+A functor $F: \mcal C \to \mcal C'$ consists of
+
+1. a map $F: \op{Ob}(\mcal C) \to \op{Ob}(\mcal C')$
+2. maps $F: \hom_{\mcal C}(X, Y) \to \hom_{\mcal C'}(F(X), F(Y))$ for any $X, Y \in \mcal C$
+
+such that
+
+1. $F(1_X) = 1_{F(X)}$ for any $X \in \mcal C$
+2. $F(g \circ f) = F(g) \circ F(f)$ for any $f: X \to Y, g: Y \to Z$
+
+In addition,
+
+1. A *contravariant* functor from $\mcal C \to \mcal C'$ is a functor from $\mcal C^{\mathrm{op}}$ to $C'$.
+2. For the functors $F: \mcal C \to \mcal C', G: \mcal C' \to \mcal C''$, their composition is the functor defined by
+$$
+\begin{align}
+G \circ F: \mcal C &\to \mcal C'' \\
+X &\mapsto G(F(X)) \\
+f &\mapsto G(F(f))
+\end{align}
+$$
+```
+
+```{example}
+1. The opposite functor is contravariant:
+$$
+\op{op}: \mcal C \to \mcal C^{\mrm {op}}
+$$
+2. A functor $F: \mcal C \to \mcal C'$ naturally induces a functor
+$$
+F^{\mrm {op}}: \mcal C^{\mrm {op}} \to \mcal C'^{\mrm {op}}
+$$
+3. $\delta_X^{\mcal I}: \mcal I \to \mcal C$ denote the constant functor to $X, 1_X \in \mcal C$
+```
+
+```{definition, name="Functor Classification"}
+A functor $F: \mcal C \to \mcal C'$ is
+
+1. *faithful* (*full*, *fully faithful*) if
+$$
+\hom_{\mcal C} (X, Y) \to \hom_{\mcal C'} (F(X), F(Y))
+$$
+is injective (surjective, bijective) for any objects $X, Y$
+2. *essentially surjective* if for each $Y \in \mcal C'$, there is $X \in C$ and an isomorphism
+$$
+F(X) \simeq Y
+$$
+3. *conservative* if $f$ is an isomorphism whenever $F(f)$ is one.
+
+The properties are closed under composistion of functors.
+```
+
+```{proposition}
+Morphism $f$ is an epi(mono-)morphism if $F(f)$ is, provided $F$ is a faithful functor.
+```
+
+```{definition, name="Product Category"}
+A family of categories $\mcal C_i, i \in I$ defines
+
+1. its product category $\prod \mcal C_i$ by
+$$
+\begin{align}
+\op{Ob}(\prod \mcal C_i) &= \prod \op{Ob} (\mcal C_i) \\
+\hom_{\prod \mcal C_i} (X, Y) &= \prod \hom_{\mcal C_i} (X_i, Y_i)
+\end{align}
+$$
+2. its disjoint union category by
+$$
+\op{Ob} (\bigsqcup \mcal C_i) = \bigsqcup \op{Ob} (\mcal C_i)
+\hom_{\sqcup \mcal C_i} (X_i, Y_j) = \cases{
+    \hom_{\mcal C_i} (X, Y) & i = j \\
+    \emptyset & i \ne j
+}
+$$
+```
