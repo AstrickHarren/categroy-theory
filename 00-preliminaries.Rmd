@@ -1,0 +1,48 @@
+# Preliminaries
+
+```{definition, name="Universe"}
+A universe $\mathcal{U}$ is a set satisfying
+
+1. $\emptyset \in \mathcal{U}$
+2. $u \in \mathcal{U}$ implies $u \subset \mathcal{U}$
+3. $u \in \mathcal{U}$ implies $\{u\} in \mathcal{U}$
+4. $u \in U$ implies $\mathcal{P}(u) \in \mathcal{U}$
+5. If $I \in U$ and $u_i \in U$ for all $i \in I$, then $\bigcup_{i \in I} u_i \in \mathcal{U}$
+6. $\mathbb{N} \in \mathcal{U}$
+
+and consequently, 
+
+7. $u \in \mcal U$ implies $\bigcup_{x \in U} x \in U$
+8. $u, v \in \mcal U$ implies $u \times v \in \mcal U$
+9. $u \subset v \in \mcal U$ implies $u \in \mcal U$
+```
+
+In addition to ZF, another axiom is added
+```{theorem}
+For any set $X$, there is a universe $\mcal U$ such that $X \in \mcal U$.
+```
+
+```{definition}
+If $\mcal U$ is a universe, a set $S$ is 
+
+1. $\mcal U$ -set if $S \in \mcal U$,
+2. $\mcal U$ -small if it is isomrophic to a $\mcal U$ -set.
+
+```
+
+```{definition, name="Order"}
+Let $\le$  be an order on a set $I$, 
+
+The order is called 
+
+1. *directed (or filtrant)* if $I \ne \emptyset$ and for all $i, j \in I$, there is $k \in I$ with $i, j \le k$
+2. *linear* if ..
+
+The set $I$ is called
+
+1. *inductively ordered* if any totally ordered subset $J$ has an upper bound
+```
+
+```{remark}
+Zorn's lemma suggests a maximal element for any inductively ordered set
+```
